@@ -22,7 +22,7 @@ class Word(BaseModel):
 
 class Code(BaseModel):
     private_key: int
-    coding_sentense: list
+    coding_sentence: list
 
 
 def get_current_username(credentials: HTTPBasicCredentials = Depends(security)):
@@ -53,8 +53,7 @@ async def words_coding_post(word: Word, secure: str = Depends(get_current_userna
 @app.post('/decoding')
 async def words_decoding_post(code: Code, secure: str = Depends(get_current_username)):
     decoding_word = ''
-    array = code.coding_sentense
-    for value in array:
+    for value in code.coding_sentence:
         decoding_word = decoding_word + chr((int(value) ** code.private_key) % multiplication_of_prime_numbers)
     return decoding_word
 
