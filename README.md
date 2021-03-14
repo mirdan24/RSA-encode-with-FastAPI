@@ -17,8 +17,22 @@ $ (optional) source env/Scripts/activate
 $ pip install fastapi
 $ python -m pip install --upgrade pip
 $ pip install uvicorn 
-$ uvicorn main:app --reload
 
+```
+
+At the beginning in our program we should import FastAPI from fastapi library:
+
+```
+from fastapi import FastAPI
+```
+and make a server object:
+```
+app = FastAPI()
+```
+
+Then we can start our server by that command in terminal:
+```
+$ uvicorn main:app --reload
 ```
 
 If everything installed and started correctly, we can enter the address http://127.0.0.1:8000 in the browser and our eyes should receive the answer:
@@ -57,3 +71,23 @@ ${
 ### but earlier..
 
 ## 3. BasicAuth
+At the beginning we should import HTTPBasic and implement object of this class:
+```
+from fastapi.security import HTTPBasic
+.
+.
+.
+security = HTTPBasic()
+```
+
+Before we start all the encryption fun, you need to log in to the server. In our case, BasicAuth is responsible for authorizations. It is enough to enter the correct login and password, which were previously given in the get_current_username function in the correct_username and correct_password variables:
+
+```
+
+    correct_username = secrets.compare_digest(credentials.username, "zadanie")
+    correct_password = secrets.compare_digest(credentials.password, "domowe")
+    
+```
+, where "zadanie" is our login and "domowe" is password.
+
+
